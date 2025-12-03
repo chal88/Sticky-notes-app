@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Sticky Notes{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN (optional) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'notes/css/styles.css' %}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'notes:note_list' %}">Sticky Notes</a>
+      <div class="ms-auto">
+        <a class="btn btn-primary" href="{% url 'notes:note_create' %}">New Note</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="text-center py-4">
+    <small>&copy; {{ year }}</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

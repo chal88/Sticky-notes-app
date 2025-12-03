@@ -1,0 +1,39 @@
+/* Page background */
+body {
+  background: #5ee594;  /* light green */
+}
+
+body {
+  background: #f7f7f9;
+}
+.card {
+  min-height: 160px;
+}
+.card.border-warning {
+  border-width: 2px;
+}
+/* Sticky note card */
+.card {
+  background: #60e4f0;       /* pale sticky blue */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  min-height: 180px;
+  padding: 10px;
+}
+
+/* Optional: pinned note style (your border-warning class) */
+.card.border-warning {
+  background: #fff59d;       /* slightly deeper yellow */
+  border: 2px solid #fdd835;
+}
+/* Random sticky note colors */
+.note-blue   { background: #bbdefb; }
+.note-pink   { background: #f8bbd0; }
+.note-green  { background: #c8e6c9; }
+.note-purple { background: #e1bee7; }
+
+.card:hover {
+  transform: translateY(-4px);
+  transition: 0.2s ease;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}

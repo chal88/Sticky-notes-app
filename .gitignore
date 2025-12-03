@@ -1,0 +1,24 @@
+# Virtual environment folders
+myenv/
+venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# Django-related
+db.sqlite3
+
+# Migrations (optional if auto-generated)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Static collection output
+/staticfiles/
+
+# IDE files
+.vscode/
+.idea/
+
+# macOS system files
+.DS_Store
