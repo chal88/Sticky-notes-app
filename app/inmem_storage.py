@@ -1,33 +1,33 @@
 """In-memory storage implementation for notes."""
-from app.note import Note
+from typing import Dict, List
+from .note import Note
 
 
 class InMemoryStorage:
-    """Simple in-memory storage. Does not persist."""
-
+    """In-memory storage for notes."""
     def __init__(self):
-        self.notes = {}
-
-    def add(self, note):
-        """Add a note to storage."""
-        self.notes[note.id] = note
-
-    def get(self, note_id):
-        """Retrieve a note by its ID."""
-        return self.notes.get(note_id)
-
-    def list_all(self):
-        """List all notes in storage."""
-        return list(self.notes.values())
-
-    def update(self, note):
-        """Update an existing note."""
-        self.notes[note.id] = note
-
-    def delete(self, note_id):
-        """Delete a note by its ID."""
-        return self.notes.pop(note_id, None)
+        self.notes: Dict[str, Note] = {}
 
     def clear_all(self):
-        """Clear all notes from storage."""
-        self.notes = {}
+        """Remove all stored notes — used by unit tests."""
+        self.notes.clear()
+
+    def add_note(self, note: Note):
+        """Store a note in memory."""
+        self.notes[note.id] = note
+        return note
+
+    def list_notes(self) -> List[Note]:
+        """Return all notes."""
+        return list(self.notes.values())
+
+    def get_note(self, note_id: str):
+        """Retrieve a note by ID."""
+        return self.notes.get(note_id)
+
+    def delete_note(self, note_id: str):
+        """Delete a note by ID. Return True if deleted."""
+        if note_id in self.notes:
+            del self.notes[note_id]
+            return True
+        return False

@@ -1,41 +1,30 @@
-"""Data model for a Note in the Sticky Notes application."""
-from dataclasses import dataclass, field
+"""Data model for a note in the Sticky Notes app."""
 import uuid
+from dataclasses import dataclass, field
 from datetime import datetime
 
 
 @dataclass
 class Note:
-    """Data model for a note."""
+    """A simple note data model."""
+    id: str
     title: str
     content: str
-    pinned: bool = False
-    id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
-    updated_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda:
+                            datetime.utcnow().isoformat())
 
-    def update(self, title=None, content=None, pinned=None):
-        """Update note attributes."""
+    @staticmethod
+    def create(title: str, content: str):
+        """Factory method used by tests."""
+        return Note(
+            id=str(uuid.uuid4()),
+            title=title,
+            content=content
+        )
+
+    def update(self, title=None, content=None):
+        """Update the note's title and/or content."""
         if title is not None:
             self.title = title
         if content is not None:
             self.content = content
-        if pinned is not None:
-            self.pinned = pinned
-        self.updated_at = datetime.utcnow().isoformat()
-
-    def to_dict(self):
-        """Convert Note to dictionary."""
-        return self.__dict__.copy()
-
-    @staticmethod
-    def from_dict(data):
-        """Create Note from dictionary."""
-        return Note(
-            id=data["id"],
-            title=data["title"],
-            content=data["content"],
-            pinned=data["pinned"],
-            created_at=data["created_at"],
-            updated_at=data["updated_at"]
-        )
