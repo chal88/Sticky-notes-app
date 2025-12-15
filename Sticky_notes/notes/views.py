@@ -1,42 +1,55 @@
-"""Views for StickyNote model."""
-from django.urls import reverse_lazy
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView
-)
+"""Views for managing sticky notes."""
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import StickyNote
 from .forms import StickyNoteForm
 
 
-class NoteListView(ListView):
+def note_list(request):
     """View to list all sticky notes."""
-    model = StickyNote
-    context_object_name = 'notes'
-    template_name = 'notes/note_list.html'
-    paginate_by = 20
+    notes = StickyNote.objects.all()
+    return render(request, "notes/note_list.html", {"notes": notes})
 
 
-class NoteDetailView(DetailView):
-    """View to display a single sticky note."""
-    model = StickyNote
-    template_name = 'notes/note_detail.html'
-
-
-class NoteCreateView(CreateView):
+def note_create(request):
     """View to create a new sticky note."""
-    model = StickyNote
-    form_class = StickyNoteForm
-    template_name = 'notes/note_form.html'
+    if request.method == "POST":
+        form = StickyNoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("notes:list")
+    else:
+        form = StickyNoteForm()
+
+    return render(request, "notes/note_form.html", {"form": form})
 
 
-class NoteUpdateView(UpdateView):
+def note_detail(request, pk):
+    """View to display a single sticky note."""
+    note = get_object_or_404(StickyNote, pk=pk)
+    return render(request, "notes/note_detail.html", {"object": note})
+
+
+def note_update(request, pk):
     """View to update an existing sticky note."""
-    model = StickyNote
-    form_class = StickyNoteForm
-    template_name = 'notes/note_form.html'
+    note = get_object_or_404(StickyNote, pk=pk)
+
+    if request.method == "POST":
+        form = StickyNoteForm(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            return redirect("notes:list")
+    else:
+        form = StickyNoteForm(instance=note)
+
+    return render(request, "notes/note_form.html", {"form": form})
 
 
-class NoteDeleteView(DeleteView):
+def note_delete(request, pk):
     """View to delete a sticky note."""
-    model = StickyNote
-    template_name = 'notes/note_confirm_delete.html'
-    success_url = reverse_lazy('notes:note_list')
+    note = get_object_or_404(StickyNote, pk=pk)
+
+    if request.method == "POST":
+        note.delete()
+        return redirect("notes:list")
+
+    return render(request, "notes/note_confirm_delete.html", {"object": note})

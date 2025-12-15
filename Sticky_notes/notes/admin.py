@@ -1,11 +1,10 @@
-"""Admin configuration for StickyNote model."""
+"""Admin configuration for the notes app."""
 from django.contrib import admin
 from .models import StickyNote
 
 
 @admin.register(StickyNote)
-class StickyNoteAdmin(admin.ModelAdmin):
-    """Admin view for StickyNote model."""
-    list_display = ('title', 'pinned', 'updated_at')
-    list_filter = ('pinned',)
-    search_fields = ('title', 'content')
+class NoteAdmin(admin.ModelAdmin):
+    """Admin view for the Note model."""
+    list_display = ("title", "created_at")
+    search_fields = ("title", "content")

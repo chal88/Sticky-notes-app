@@ -9,14 +9,14 @@
           <div class="card-body">
             <h5 class="card-title">{{ note.title }}</h5>
             <p class="card-text">{{ note.content|linebreaksbr|truncatechars:150 }}</p>
-            <a href="{% url 'notes:note_detail' note.pk %}" class="btn btn-sm btn-outline-primary">Open</a>
-            <a href="{% url 'notes:note_update' note.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{% url 'notes:note_detail' note.pk %}" class="btn btn-sm btn-outline-secondary">Open</a>
+            <a href="{% url 'notes:note_update' note.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
             <a href="{% url 'notes:note_delete' note.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
           </div>
         </div>
       </div>
     {% empty %}
-      <p>No notes yet. <a href="{% url 'notes:note_create' %}">Create one</a>.</p>
+      <p>No notes yet. <a href="{% url 'notes:create' %}">Create one</a>.</p>
     {% endfor %}
   </div>
 

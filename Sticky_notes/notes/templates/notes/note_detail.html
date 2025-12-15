@@ -6,5 +6,5 @@
 
   <a class="btn btn-secondary" href="{% url 'notes:note_update' object.pk %}">Edit</a>
   <a class="btn btn-danger" href="{% url 'notes:note_delete' object.pk %}">Delete</a>
-  <a class="btn btn-link" href="{% url 'notes:note_list' %}">Back</a>
+  <a class="btn btn-link" href="{% url 'notes:list' %}">Back</a>
 {% endblock %}

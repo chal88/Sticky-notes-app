@@ -19,10 +19,10 @@ class TestURLs(SimpleTestCase):
 
     def test_note_edit_url(self):
         """Test the URL for the note edit view."""
-        url = reverse("notes:edit", kwargs={"pk": 1})
-        self.assertEqual(resolve(url).func, views.note_edit)
+        url = reverse("notes:note_update", kwargs={"pk": 1})
+        self.assertEqual(resolve(url).func, views.note_update)
 
     def test_note_delete_url(self):
         """Test the URL for the note deletion view."""
-        url = reverse("notes:delete", kwargs={"pk": 1})
+        url = reverse("notes:note_delete", kwargs={"pk": 1})
         self.assertEqual(resolve(url).func, views.note_delete)

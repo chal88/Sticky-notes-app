@@ -4,6 +4,6 @@
   <p>Are you sure you want to delete "{{ object.title }}"?</p>
   <form method="post">{% csrf_token %}
     <button class="btn btn-danger" type="submit">Yes, delete</button>
-    <a class="btn btn-link" href="{% url 'notes:note_detail' object.pk %}">Cancel</a>
+    <a class="btn btn-link" href="{% url 'notes:list' %}">Cancel</a>
   </form>
 {% endblock %}
